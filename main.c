@@ -22,6 +22,7 @@
 
 int temperatura;
 int menu = 1;
+float erro;
 
 int setPoint = 4200;
 int setPointReferencia = 0;
@@ -30,6 +31,7 @@ char setPoint_string[32];
 int kp = 90;
 int kpReferencia = 0;
 char kp_string[32];
+float up;
 
 void imprimirTemperatura(unsigned int tempSet){
     int milhar = tempSet/1000;
@@ -149,15 +151,26 @@ void iniciarLcd(){
     menu = 1;
 }
 
+void realizarCalculo()
+{
+    temperatura = (ADC_Read(0)*10/8 - 150);
+    erro        = (setPoint/10) - temperatura;
+    up          = kp * erro;
+}
+
+void controlarCooler()
+{
+    int cooler  = (unsigned int)ADC_Read(1);
+    cooler      = controleMaximoMinimo(cooler);
+    PWM2_Duty(cooler, 4000);
+}
+
 void main(void) {
     TRISA = 0xFF;
     TRISB = 0x0F;
     TRISC = 0x00;
     TRISD = 0x00;
     TRISE = 0x00;
-    int cooler;
-    float erro;
-    float up;
     
     ADC_Init();
     PWM1_Start();
@@ -166,17 +179,13 @@ void main(void) {
     
     while(1){
         controlarValores();
-        temperatura = (ADC_Read(0)*10/8 - 150);
-        cooler      = (unsigned int)ADC_Read(1);
-        erro        = (setPoint/10) - temperatura;
-        up          = kp * erro;
+        realizarCalculo();
+        controlarCooler();
         
-        cooler      = controleMaximoMinimo(cooler);
         temperatura = controleMaximoMinimo(temperatura);
         up          = controleMaximoMinimo(up);
         
         PWM1_Duty(up, 4000);
-        PWM2_Duty(cooler, 4000);
         imprimirValoresLcd();
     }
     
