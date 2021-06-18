@@ -20,18 +20,26 @@
 #define S3 RB2
 #define S4 RB3
 
-int temperatura;
+float temperatura = 0;
+float temperaturaReferencia = 0;
 int menu = 1;
 float erro;
 
-int setPoint = 4200;
+int setPoint = 5000;
 int setPointReferencia = 0;
 char setPoint_string[32];
 
-int kp = 90;
+float kp = 10;
+float ki = 1;
+float kd = 0.002;
+
 int kpReferencia = 0;
 char kp_string[32];
-float up;
+
+float proporcional;
+float integral;
+float derivativo;
+float PID;
 
 void imprimirTemperatura(unsigned int tempSet){
     int milhar = tempSet/1000;
@@ -153,9 +161,17 @@ void iniciarLcd(){
 
 void realizarCalculo()
 {
-    temperatura = (ADC_Read(0)*10/8 - 150);
-    erro        = (setPoint/10) - temperatura;
-    up          = kp * erro;
+    temperatura             = (ADC_Read(0)*10/8 - 150);
+    erro                    = (setPoint/10) - temperatura;
+    proporcional            = kp * erro;
+    integral               += (erro * ki) * 100E-3;
+    derivativo             += ((temperaturaReferencia - temperatura) * kd) / 100E-3;
+    temperaturaReferencia   = temperatura;
+    
+    PID = (proporcional + integral + derivativo) / 4;
+    PID = controleMaximoMinimo(PID);
+
+    PWM1_Duty(PID, 4000);
 }
 
 void controlarCooler()
@@ -178,14 +194,9 @@ void main(void) {
     iniciarLcd();
     
     while(1){
-        controlarValores();
+        //controlarValores();
         realizarCalculo();
         controlarCooler();
-        
-        temperatura = controleMaximoMinimo(temperatura);
-        up          = controleMaximoMinimo(up);
-        
-        PWM1_Duty(up, 4000);
         imprimirValoresLcd();
     }
     
