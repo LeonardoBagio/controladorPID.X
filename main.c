@@ -19,16 +19,19 @@
 #define S2 RB1
 #define S3 RB2
 #define S4 RB3
-float temperatura = 0;
-float temperaturaReferencia = 0;
+int temperatura = 0;
+int temperaturaReferencia = 0;
 int menu;
-float erro;
 char string[32];
 int setPoint = 4000;
 int setPointReferencia = 0;
-int kp = 100;
-int ki = 1;
-int kd = 1;
+int erro;
+int erroAnterior;
+int kp = 50;
+int ki = 2;
+int kd = 0.001;
+int tempo = 0.1;
+int polo = 10;
 int kpReferencia = 0;
 int kiReferencia = 0;
 int kdReferencia = 0;
@@ -56,7 +59,7 @@ void controlarValores(){
         }
         
         if (menu == 2){
-            kp += 1;
+            kp += 10;
         }
         
         if (menu == 3){
@@ -77,7 +80,7 @@ void controlarValores(){
         }
         
         if (menu == 2){
-            kp -= 1;
+            kp -= 10;
         }
         
         if (menu == 3){
@@ -200,6 +203,21 @@ void realizarCalculo()
     
     PID = (proporcional + integral + derivativo);
     PID = controleMaximoMinimo(PID);
+    
+    PWM1_Duty(PID, 4000);
+}
+
+void realizarCalculo2()
+{
+    temperatura             = (ADC_Read(0)*10/8 - 150);
+    erro                    = (setPoint/10) - temperatura;
+    proporcional            = kp * erro;
+    integral               += (tempo * ki * erro);
+    derivativo             += ((polo * kd * (erro - erroAnterior)) / (1 + polo * tempo));  
+    erroAnterior            = erro;
+    
+    PID = (proporcional + integral + derivativo);
+    PID = controleMaximoMinimo(PID);    
     
     PWM1_Duty(PID, 4000);
 }
