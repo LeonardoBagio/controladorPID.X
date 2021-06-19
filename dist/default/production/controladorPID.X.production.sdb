@@ -47,17 +47,17 @@
 [v _lcd_init lcd_init `(v  1 e 1 0 ]
 "76
 [v _lcd_str lcd_str `(v  1 e 1 0 ]
-"44 C:\Users\leoba\MPLABXProjects\controladorPID.X\main.c
+"41 C:\Users\leoba\MPLABXProjects\controladorPID.X\main.c
 [v _controlarValores controlarValores `(v  1 e 1 0 ]
-"114
+"112
 [v _controleMaximoMinimo controleMaximoMinimo `(i  1 e 2 0 ]
-"126
+"124
 [v _imprimirValoresLcd imprimirValoresLcd `(v  1 e 1 0 ]
-"195
+"184
 [v _realizarCalculo realizarCalculo `(v  1 e 1 0 ]
-"225
+"199
 [v _controlarCooler controlarCooler `(v  1 e 1 0 ]
-"232
+"206
 [v _main main `(v  1 e 1 0 ]
 "12 C:\Users\leoba\MPLABXProjects\controladorPID.X\PWM.c
 [v _PWM_Init PWM_Init `(v  1 e 1 0 ]
@@ -71,13 +71,13 @@
 [v _PWM2_Start PWM2_Start `(v  1 e 1 0 ]
 "340 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
-[s S184 . 1 `uc 1 RE0 1 0 :1:0 
+[s S180 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 ]
 "414
-[u S188 . 1 `S184 1 . 1 0 ]
-[v _PORTEbits PORTEbits `VES188  1 e 1 @9 ]
+[u S184 . 1 `S180 1 . 1 0 ]
+[v _PORTEbits PORTEbits `VES184  1 e 1 @9 ]
 "892
 [v _CCPR1L CCPR1L `VEuc  1 e 1 @21 ]
 "1080
@@ -151,40 +151,40 @@
 "26
 [v _setPoint setPoint `i  1 e 2 0 ]
 "27
-[v _setPointReferencia setPointReferencia `i  1 e 2 0 ]
+[v _setPointCalculo setPointCalculo `i  1 e 2 0 ]
 "28
-[v _erro erro `i  1 e 2 0 ]
+[v _setPointReferencia setPointReferencia `i  1 e 2 0 ]
 "29
-[v _erroAnterior erroAnterior `i  1 e 2 0 ]
+[v _erro erro `i  1 e 2 0 ]
 "30
 [v _kp kp `i  1 e 2 0 ]
 "31
 [v _ki ki `i  1 e 2 0 ]
 "32
 [v _kd kd `i  1 e 2 0 ]
-"35
+"33
 [v _kpReferencia kpReferencia `i  1 e 2 0 ]
-"36
+"34
 [v _kiReferencia kiReferencia `i  1 e 2 0 ]
-"38
-[v _PIDReferencia PIDReferencia `i  1 e 2 0 ]
-"39
+"35
+[v _kdReferencia kdReferencia `i  1 e 2 0 ]
+"36
 [v _proporcional proporcional `i  1 e 2 0 ]
-"40
+"37
 [v _integral integral `i  1 e 2 0 ]
-"41
+"38
 [v _derivativo derivativo `i  1 e 2 0 ]
-"42
+"39
 [v _PID PID `i  1 e 2 0 ]
-"232
+"206
 [v _main main `(v  1 e 1 0 ]
 {
-"259
+"233
 } 0
-"195
+"184
 [v _realizarCalculo realizarCalculo `(v  1 e 1 0 ]
 {
-"208
+"197
 } 0
 "15 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -208,14 +208,14 @@
 {
 "74
 } 0
-"126 C:\Users\leoba\MPLABXProjects\controladorPID.X\main.c
+"124 C:\Users\leoba\MPLABXProjects\controladorPID.X\main.c
 [v _imprimirValoresLcd imprimirValoresLcd `(v  1 e 1 0 ]
 {
-"145
+"143
 [v imprimirValoresLcd@centena centena `i  1 a 2 16 ]
-"144
+"142
 [v imprimirValoresLcd@milhar milhar `i  1 a 2 14 ]
-"193
+"182
 } 0
 "505 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
@@ -320,39 +320,39 @@
 [v ___awdiv@dividend dividend `i  1 p 2 9 ]
 "41
 } 0
-"44 C:\Users\leoba\MPLABXProjects\controladorPID.X\main.c
+"41 C:\Users\leoba\MPLABXProjects\controladorPID.X\main.c
 [v _controlarValores controlarValores `(v  1 e 1 0 ]
 {
-"45
+"42
 [v controlarValores@S1Anterior S1Anterior `uc  1 s 1 S1Anterior ]
-"46
+"43
 [v controlarValores@S1Atual S1Atual `uc  1 s 1 S1Atual ]
-"47
+"44
 [v controlarValores@S2Anterior S2Anterior `uc  1 s 1 S2Anterior ]
-"48
+"45
 [v controlarValores@S2Atual S2Atual `uc  1 s 1 S2Atual ]
-"49
+"46
 [v controlarValores@S3Anterior S3Anterior `uc  1 s 1 S3Anterior ]
-"50
+"47
 [v controlarValores@S3Atual S3Atual `uc  1 s 1 S3Atual ]
-"51
+"48
 [v controlarValores@S4Anterior S4Anterior `uc  1 s 1 S4Anterior ]
-"52
+"49
 [v controlarValores@S4Atual S4Atual `uc  1 s 1 S4Atual ]
-"112
+"110
 } 0
-"225
+"199
 [v _controlarCooler controlarCooler `(v  1 e 1 0 ]
 {
-"227
+"201
 [v controlarCooler@cooler cooler `i  1 a 2 7 ]
-"230
+"204
 } 0
-"114
+"112
 [v _controleMaximoMinimo controleMaximoMinimo `(i  1 e 2 0 ]
 {
 [v controleMaximoMinimo@valor valor `i  1 p 2 0 ]
-"124
+"122
 } 0
 "29 C:\Users\leoba\MPLABXProjects\controladorPID.X\PWM.c
 [v _PWM2_Duty PWM2_Duty `(v  1 e 1 0 ]
@@ -389,17 +389,17 @@
 "8 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S530 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S526 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S535 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S538 . 4 `l 1 i 4 0 `d 1 f 4 0 `S530 1 fAsBytes 4 0 `S535 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S538  1 a 4 66 ]
+[s S531 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S534 . 4 `l 1 i 4 0 `d 1 f 4 0 `S526 1 fAsBytes 4 0 `S531 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S534  1 a 4 66 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 60 ]
-[s S607 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S603 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S610 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S607 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S610  1 a 2 70 ]
+[u S606 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S603 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S606  1 a 2 70 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 65 ]
 "11

@@ -1979,19 +1979,16 @@ int temperatura = 0;
 int temperaturaReferencia = 0;
 int menu;
 char string[32];
-int setPoint = 4000;
+int setPoint = 5500;
+int setPointCalculo = 0;
 int setPointReferencia = 0;
 int erro;
-int erroAnterior;
 int kp = 50;
 int ki = 2;
-int kd = 0.001;
-int tempo = 0.1;
-int polo = 10;
+int kd = 0;
 int kpReferencia = 0;
 int kiReferencia = 0;
 int kdReferencia = 0;
-int PIDReferencia = 0;
 int proporcional;
 int integral;
 int derivativo;
@@ -2052,6 +2049,7 @@ void controlarValores(){
     S3Atual = RB2;
 
     if((S3Atual)&&(!S3Anterior)){
+        setPointCalculo = setPoint;
     }
 
     S3Anterior = S3Atual;
@@ -2128,40 +2126,25 @@ void imprimirValoresLcd(){
         lcd_str(string);
         kiReferencia = ki;
     }
-# 185 "main.c"
-    if (PID != PIDReferencia){
+
+    if (kd != kdReferencia){
         lcd_cmd(0xC9 +2);
         lcd_str("     ");
         lcd_cmd(0xC9 +2);
-        sprintf(string, "%d", PID);
+        sprintf(string, "%d", kd);
         lcd_str(string);
-        PIDReferencia = PID;
+        kdReferencia = kd;
     }
 }
 
 void realizarCalculo()
 {
     temperatura = (ADC_Read(0)*10/8 - 150);
-    erro = (setPoint/10) - temperatura;
+    erro = (setPointCalculo/10) - temperatura;
     proporcional = kp * erro;
     integral += (erro * ki) * 100E-3;
     derivativo += ((temperaturaReferencia - temperatura) * kd) / 100E-3;
     temperaturaReferencia = temperatura;
-
-    PID = (proporcional + integral + derivativo);
-    PID = controleMaximoMinimo(PID);
-
-    PWM1_Duty(PID, 4000);
-}
-
-void realizarCalculo2()
-{
-    temperatura = (ADC_Read(0)*10/8 - 150);
-    erro = (setPoint/10) - temperatura;
-    proporcional = kp * erro;
-    integral += (tempo * ki * erro);
-    derivativo += ((polo * kd * (erro - erroAnterior)) / (1 + polo * tempo));
-    erroAnterior = erro;
 
     PID = (proporcional + integral + derivativo);
     PID = controleMaximoMinimo(PID);
