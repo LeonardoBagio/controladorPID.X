@@ -27,9 +27,9 @@ float erro;
 char string[32];
 int setPoint = 5000;
 int setPointReferencia = 0;
-float kp = 10;
-float ki = 1;
-float kd = 0.002;
+int kp = 10;
+int ki = 1;
+int kd = 0.002;
 int kpReferencia = 0;
 float proporcional;
 float integral;
@@ -166,6 +166,10 @@ void main(void) {
     lcd_str("TP:  C  KI:");
     lcd_cmd(L2_digito1);
     lcd_str("KP:     KD:");
+    imprimirValoresLcd();
+    menu = 2;
+    imprimirValoresLcd();
+    menu = 1;
     
     while(1){
         kp = controleMaximoMinimo(kp);

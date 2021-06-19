@@ -15,8 +15,6 @@
 [v ___awmod __awmod `(i  1 e 2 0 ]
 "505 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
-"4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fleq.c
-[v ___fleq __fleq `(b  1 e 0 0 ]
 "43 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
 [v ___fltol __fltol `(l  1 e 4 0 ]
 "5 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\lwdiv.c
@@ -159,11 +157,11 @@
 "29
 [v _setPointReferencia setPointReferencia `i  1 e 2 0 ]
 "30
-[v _kp kp `f  1 e 4 0 ]
+[v _kp kp `i  1 e 2 0 ]
 "31
-[v _ki ki `f  1 e 4 0 ]
+[v _ki ki `i  1 e 2 0 ]
 "32
-[v _kd kd `f  1 e 4 0 ]
+[v _kd kd `i  1 e 2 0 ]
 "33
 [v _kpReferencia kpReferencia `i  1 e 2 0 ]
 "34
@@ -177,7 +175,7 @@
 "155
 [v _main main `(v  1 e 1 0 ]
 {
-"182
+"186
 } 0
 "133
 [v _realizarCalculo realizarCalculo `(v  1 e 1 0 ]
@@ -193,6 +191,29 @@
 [v ___wmul@multiplier multiplier `ui  1 p 2 5 ]
 [v ___wmul@multiplicand multiplicand `ui  1 p 2 7 ]
 "53
+} 0
+"242 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcadd.c
+[v ___flsub __flsub `(d  1 e 4 0 ]
+{
+[v ___flsub@a a `d  1 p 4 0 ]
+[v ___flsub@b b `d  1 p 4 4 ]
+"250
+} 0
+"10
+[v ___fladd __fladd `(d  1 e 4 0 ]
+{
+"17
+[v ___fladd@grs grs `uc  1 a 1 73 ]
+"15
+[v ___fladd@bexp bexp `uc  1 a 1 72 ]
+"16
+[v ___fladd@aexp aexp `uc  1 a 1 71 ]
+"13
+[v ___fladd@signs signs `uc  1 a 1 70 ]
+"10
+[v ___fladd@b b `d  1 p 4 54 ]
+[v ___fladd@a a `d  1 p 4 58 ]
+"237
 } 0
 "17 C:\Users\leoba\MPLABXProjects\controladorPID.X\PWM.c
 [v _PWM1_Duty PWM1_Duty `(v  1 e 1 0 ]
@@ -210,9 +231,9 @@
 [v _imprimirValoresLcd imprimirValoresLcd `(v  1 e 1 0 ]
 {
 "109
-[v imprimirValoresLcd@centena centena `i  1 a 2 43 ]
+[v imprimirValoresLcd@centena centena `i  1 a 2 16 ]
 "108
-[v imprimirValoresLcd@milhar milhar `i  1 a 2 41 ]
+[v imprimirValoresLcd@milhar milhar `i  1 a 2 14 ]
 "131
 } 0
 "505 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\doprnt.c
@@ -220,20 +241,20 @@
 {
 [v sprintf@sp sp `*.5uc  1 a 1 wreg ]
 "545
-[v sprintf@val val `ui  1 a 2 11 ]
+[v sprintf@val val `ui  1 a 2 9 ]
 "512
-[v sprintf@c c `uc  1 a 1 14 ]
+[v sprintf@c c `uc  1 a 1 12 ]
 "521
-[v sprintf@prec prec `c  1 a 1 10 ]
+[v sprintf@prec prec `c  1 a 1 8 ]
 "525
-[v sprintf@flag flag `uc  1 a 1 9 ]
+[v sprintf@flag flag `uc  1 a 1 7 ]
 "507
-[v sprintf@ap ap `[1]*.4v  1 a 1 8 ]
+[v sprintf@ap ap `[1]*.4v  1 a 1 6 ]
 "505
 [v sprintf@sp sp `*.5uc  1 a 1 wreg ]
 [v sprintf@f f `*.24DCuc  1 p 1 0 ]
 "550
-[v sprintf@sp sp `*.5uc  1 a 1 13 ]
+[v sprintf@sp sp `*.5uc  1 a 1 11 ]
 "1567
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\lwmod.c
@@ -294,13 +315,6 @@
 [v lcd_wr@val val `uc  1 a 1 0 ]
 "33
 } 0
-"4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fleq.c
-[v ___fleq __fleq `(b  1 e 0 0 ]
-{
-[v ___fleq@ff1 ff1 `d  1 p 4 28 ]
-[v ___fleq@ff2 ff2 `d  1 p 4 32 ]
-"12
-} 0
 "5 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
 {
@@ -346,30 +360,7 @@
 [v controlarValores@S4Atual S4Atual `uc  1 s 1 S4Atual ]
 "91
 } 0
-"242 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcadd.c
-[v ___flsub __flsub `(d  1 e 4 0 ]
-{
-[v ___flsub@a a `d  1 p 4 0 ]
-[v ___flsub@b b `d  1 p 4 4 ]
-"250
-} 0
-"10
-[v ___fladd __fladd `(d  1 e 4 0 ]
-{
-"17
-[v ___fladd@grs grs `uc  1 a 1 73 ]
-"15
-[v ___fladd@bexp bexp `uc  1 a 1 72 ]
-"16
-[v ___fladd@aexp aexp `uc  1 a 1 71 ]
-"13
-[v ___fladd@signs signs `uc  1 a 1 70 ]
-"10
-[v ___fladd@b b `d  1 p 4 54 ]
-[v ___fladd@a a `d  1 p 4 58 ]
-"237
-} 0
-"148 C:\Users\leoba\MPLABXProjects\controladorPID.X\main.c
+"148
 [v _controlarCooler controlarCooler `(v  1 e 1 0 ]
 {
 "150

@@ -289,22 +289,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 "30
-[; ;main.c: 30: float kp = 10;
-[v _kp `f ~T0 @X0 1 e ]
+[; ;main.c: 30: int kp = 10;
+[v _kp `i ~T0 @X0 1 e ]
 [i _kp
--> -> 10 `i `f
+-> 10 `i
 ]
 "31
-[; ;main.c: 31: float ki = 1;
-[v _ki `f ~T0 @X0 1 e ]
+[; ;main.c: 31: int ki = 1;
+[v _ki `i ~T0 @X0 1 e ]
 [i _ki
--> -> 1 `i `f
+-> 1 `i
 ]
 "32
-[; ;main.c: 32: float kd = 0.002;
-[v _kd `f ~T0 @X0 1 e ]
+[; ;main.c: 32: int kd = 0.002;
+[v _kd `i ~T0 @X0 1 e ]
 [i _kd
--> .0.002 `f
+-> .0.002 `i
 ]
 "33
 [; ;main.c: 33: int kpReferencia = 0;
@@ -376,7 +376,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "55
 [; ;main.c: 55:             kp += 10;
-[e =+ _kp -> -> 10 `i `f ]
+[e =+ _kp -> 10 `i ]
 "56
 [; ;main.c: 56:         }
 }
@@ -410,7 +410,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "66
 [; ;main.c: 66:             kp -= 10;
-[e =- _kp -> -> 10 `i `f ]
+[e =- _kp -> 10 `i ]
 "67
 [; ;main.c: 67:         }
 }
@@ -577,20 +577,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "122
 [; ;main.c: 122:         if (kp != kpReferencia){
-[e $ ! != _kp -> _kpReferencia `f 119  ]
+[e $ ! != _kp _kpReferencia 119  ]
 {
 "123
 [; ;main.c: 123:             lcd_cmd(0xC3);
 [e ( _lcd_cmd (1 -> -> 195 `i `uc ]
 "124
 [; ;main.c: 124:             sprintf(string, "%d", kp);
-[e ( _sprintf (1 , (. , &U _string :s 3C -> _kp `d ]
+[e ( _sprintf (1 , (. , &U _string :s 3C _kp ]
 "125
 [; ;main.c: 125:             lcd_str(string);
 [e ( _lcd_str (1 -> &U _string `*Cuc ]
 "126
 [; ;main.c: 126:             kpReferencia = kp;
-[e = _kpReferencia -> _kp `i ]
+[e = _kpReferencia _kp ]
 "127
 [; ;main.c: 127:         }
 }
@@ -622,13 +622,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _erro - -> / _setPoint -> 10 `i `f _temperatura ]
 "137
 [; ;main.c: 137:     proporcional = kp * erro;
-[e = _proporcional * _kp _erro ]
+[e = _proporcional * -> _kp `f _erro ]
 "138
 [; ;main.c: 138:     integral += (erro * ki) * 100E-3;
-[e =+ _integral -> * -> * _erro _ki `d .100e-3 `f ]
+[e =+ _integral -> * -> * _erro -> _ki `f `d .100e-3 `f ]
 "139
 [; ;main.c: 139:     derivativo += ((temperaturaReferencia - temperatura) * kd) / 100E-3;
-[e =+ _derivativo -> / -> * - _temperaturaReferencia _temperatura _kd `d .100e-3 `f ]
+[e =+ _derivativo -> / -> * - _temperaturaReferencia _temperatura -> _kd `f `d .100e-3 `f ]
 "140
 [; ;main.c: 140:     temperaturaReferencia = temperatura;
 [e = _temperaturaReferencia _temperatura ]
@@ -713,42 +713,54 @@ Version 4.0 HI-TECH Software Intermediate Code
 "168
 [; ;main.c: 168:     lcd_str("KP:     KD:");
 [e ( _lcd_str (1 :s 5C ]
+"169
+[; ;main.c: 169:     imprimirValoresLcd();
+[e ( _imprimirValoresLcd ..  ]
 "170
-[; ;main.c: 170:     while(1){
+[; ;main.c: 170:     menu = 2;
+[e = _menu -> 2 `i ]
+"171
+[; ;main.c: 171:     imprimirValoresLcd();
+[e ( _imprimirValoresLcd ..  ]
+"172
+[; ;main.c: 172:     menu = 1;
+[e = _menu -> 1 `i ]
+"174
+[; ;main.c: 174:     while(1){
 [e :U 124 ]
 {
-"171
-[; ;main.c: 171:         kp = controleMaximoMinimo(kp);
-[e = _kp -> ( _controleMaximoMinimo (1 -> _kp `i `f ]
-"172
-[; ;main.c: 172:         ki = controleMaximoMinimo(ki);
-[e = _ki -> ( _controleMaximoMinimo (1 -> _ki `i `f ]
-"173
-[; ;main.c: 173:         kd = controleMaximoMinimo(kd);
-[e = _kd -> ( _controleMaximoMinimo (1 -> _kd `i `f ]
 "175
-[; ;main.c: 175:         controlarValores();
-[e ( _controlarValores ..  ]
+[; ;main.c: 175:         kp = controleMaximoMinimo(kp);
+[e = _kp ( _controleMaximoMinimo (1 _kp ]
 "176
-[; ;main.c: 176:         realizarCalculo();
-[e ( _realizarCalculo ..  ]
+[; ;main.c: 176:         ki = controleMaximoMinimo(ki);
+[e = _ki ( _controleMaximoMinimo (1 _ki ]
 "177
-[; ;main.c: 177:         controlarCooler();
-[e ( _controlarCooler ..  ]
-"178
-[; ;main.c: 178:         imprimirValoresLcd();
-[e ( _imprimirValoresLcd ..  ]
+[; ;main.c: 177:         kd = controleMaximoMinimo(kd);
+[e = _kd ( _controleMaximoMinimo (1 _kd ]
 "179
-[; ;main.c: 179:     }
+[; ;main.c: 179:         controlarValores();
+[e ( _controlarValores ..  ]
+"180
+[; ;main.c: 180:         realizarCalculo();
+[e ( _realizarCalculo ..  ]
+"181
+[; ;main.c: 181:         controlarCooler();
+[e ( _controlarCooler ..  ]
+"182
+[; ;main.c: 182:         imprimirValoresLcd();
+[e ( _imprimirValoresLcd ..  ]
+"183
+[; ;main.c: 183:     }
 }
 [e :U 123 ]
 [e $U 124  ]
 [e :U 125 ]
-"181
-[; ;main.c: 181:     return;
+"185
+[; ;main.c: 185:     return;
 [e $UE 122  ]
-"182
-[; ;main.c: 182: }
+"186
+[; ;main.c: 186: }
 [e :UE 122 ]
 }
 [p f _sprintf 8388736 ]
