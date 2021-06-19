@@ -1975,20 +1975,20 @@ void lcd_str(const char* str);
 
 
 
-int x = 1;
 float temperatura = 0;
 float temperaturaReferencia = 0;
 int menu;
 float erro;
 char string[32];
-int setPoint = 5000;
+int setPoint = 4000;
 int setPointReferencia = 0;
-int kp = 10;
+int kp = 100;
 int ki = 1;
 int kd = 1;
 int kpReferencia = 0;
 int kiReferencia = 0;
 int kdReferencia = 0;
+int PIDReferencia = 0;
 int proporcional;
 int integral;
 int derivativo;
@@ -2125,14 +2125,14 @@ void imprimirValoresLcd(){
         lcd_str(string);
         kiReferencia = ki;
     }
-
-    if (kd != kdReferencia){
+# 182 "main.c"
+    if (PID != PIDReferencia){
         lcd_cmd(0xC9 +2);
         lcd_str("     ");
         lcd_cmd(0xC9 +2);
-        sprintf(string, "%d", kd);
+        sprintf(string, "%d", PID);
         lcd_str(string);
-        kdReferencia = kd;
+        PIDReferencia = PID;
     }
 }
 
@@ -2145,7 +2145,7 @@ void realizarCalculo()
     derivativo += ((temperaturaReferencia - temperatura) * kd) / 100E-3;
     temperaturaReferencia = temperatura;
 
-    PID = (proporcional + integral + derivativo) / 4;
+    PID = (proporcional + integral + derivativo);
     PID = controleMaximoMinimo(PID);
 
     PWM1_Duty(PID, 4000);

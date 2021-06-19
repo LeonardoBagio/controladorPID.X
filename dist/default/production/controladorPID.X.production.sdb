@@ -55,11 +55,11 @@
 [v _controleMaximoMinimo controleMaximoMinimo `(i  1 e 2 0 ]
 "123
 [v _imprimirValoresLcd imprimirValoresLcd `(v  1 e 1 0 ]
-"183
+"192
 [v _realizarCalculo realizarCalculo `(v  1 e 1 0 ]
-"198
+"207
 [v _controlarCooler controlarCooler `(v  1 e 1 0 ]
-"205
+"214
 [v _main main `(v  1 e 1 0 ]
 "12 C:\Users\leoba\MPLABXProjects\controladorPID.X\PWM.c
 [v _PWM_Init PWM_Init `(v  1 e 1 0 ]
@@ -142,32 +142,32 @@
 [v _TRISC2 TRISC2 `VEb  1 e 0 @1082 ]
 "358 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\doprnt.c
 [v _dpowers dpowers `DC[5]ui  1 s 10 dpowers ]
-"23 C:\Users\leoba\MPLABXProjects\controladorPID.X\main.c
+"22 C:\Users\leoba\MPLABXProjects\controladorPID.X\main.c
 [v _temperatura temperatura `f  1 e 4 0 ]
-"24
+"23
 [v _temperaturaReferencia temperaturaReferencia `f  1 e 4 0 ]
-"25
+"24
 [v _menu menu `i  1 e 2 0 ]
-"26
+"25
 [v _erro erro `f  1 e 4 0 ]
-"27
+"26
 [v _string string `[32]uc  1 e 32 0 ]
-"28
+"27
 [v _setPoint setPoint `i  1 e 2 0 ]
-"29
+"28
 [v _setPointReferencia setPointReferencia `i  1 e 2 0 ]
-"30
+"29
 [v _kp kp `i  1 e 2 0 ]
-"31
+"30
 [v _ki ki `i  1 e 2 0 ]
-"32
+"31
 [v _kd kd `i  1 e 2 0 ]
-"33
+"32
 [v _kpReferencia kpReferencia `i  1 e 2 0 ]
-"34
+"33
 [v _kiReferencia kiReferencia `i  1 e 2 0 ]
 "35
-[v _kdReferencia kdReferencia `i  1 e 2 0 ]
+[v _PIDReferencia PIDReferencia `i  1 e 2 0 ]
 "36
 [v _proporcional proporcional `i  1 e 2 0 ]
 "37
@@ -176,15 +176,15 @@
 [v _derivativo derivativo `i  1 e 2 0 ]
 "39
 [v _PID PID `i  1 e 2 0 ]
-"205
+"214
 [v _main main `(v  1 e 1 0 ]
 {
-"232
+"241
 } 0
-"183
+"192
 [v _realizarCalculo realizarCalculo `(v  1 e 1 0 ]
 {
-"196
+"205
 } 0
 "15 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -238,7 +238,7 @@
 [v imprimirValoresLcd@centena centena `i  1 a 2 16 ]
 "141
 [v imprimirValoresLcd@milhar milhar `i  1 a 2 14 ]
-"181
+"190
 } 0
 "505 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
@@ -364,12 +364,12 @@
 [v controlarValores@S4Atual S4Atual `uc  1 s 1 S4Atual ]
 "109
 } 0
-"198
+"207
 [v _controlarCooler controlarCooler `(v  1 e 1 0 ]
 {
-"200
+"209
 [v controlarCooler@cooler cooler `i  1 a 2 15 ]
-"203
+"212
 } 0
 "111
 [v _controleMaximoMinimo controleMaximoMinimo `(i  1 e 2 0 ]
