@@ -14,11 +14,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "65 ./lcd.h
 [; ;./lcd.h: 65: void lcd_cmd(unsigned char val);
 [v _lcd_cmd `(v ~T0 @X0 0 ef1`uc ]
-"194 C:\Program Files\Microchip\xc8\v2.32\pic\include\c90\stdio.h
-[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
-"67 ./lcd.h
+"67
 [; ;./lcd.h: 67: void lcd_str(const char* str);
 [v _lcd_str `(v ~T0 @X0 0 ef1`*Cuc ]
+"194 C:\Program Files\Microchip\xc8\v2.32\pic\include\c90\stdio.h
+[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
 "19 ./adc.h
 [; ;./adc.h: 19: unsigned int ADC_Read(unsigned char channel);
 [v _ADC_Read `(ui ~T0 @X0 0 ef1`uc ]
@@ -252,7 +252,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"23 main.c
+"22 main.c
+[; ;main.c: 22: int x = 1;
+[v _x `i ~T0 @X0 1 e ]
+[i _x
+-> 1 `i
+]
+"23
 [; ;main.c: 23: float temperatura = 0;
 [v _temperatura `f ~T0 @X0 1 e ]
 [i _temperatura
@@ -265,11 +271,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 0 `i `f
 ]
 "25
-[; ;main.c: 25: int menu = 1;
+[; ;main.c: 25: int menu;
 [v _menu `i ~T0 @X0 1 e ]
-[i _menu
--> 1 `i
-]
 "26
 [; ;main.c: 26: float erro;
 [v _erro `f ~T0 @X0 1 e ]
@@ -313,17 +316,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 "34
-[; ;main.c: 34: float proporcional;
-[v _proporcional `f ~T0 @X0 1 e ]
+[; ;main.c: 34: int proporcional;
+[v _proporcional `i ~T0 @X0 1 e ]
 "35
-[; ;main.c: 35: float integral;
-[v _integral `f ~T0 @X0 1 e ]
+[; ;main.c: 35: int integral;
+[v _integral `i ~T0 @X0 1 e ]
 "36
-[; ;main.c: 36: float derivativo;
-[v _derivativo `f ~T0 @X0 1 e ]
+[; ;main.c: 36: int derivativo;
+[v _derivativo `i ~T0 @X0 1 e ]
 "37
-[; ;main.c: 37: float PID;
-[v _PID `f ~T0 @X0 1 e ]
+[; ;main.c: 37: int PID;
+[v _PID `i ~T0 @X0 1 e ]
 "39
 [; ;main.c: 39: void controlarValores(){
 [v _controlarValores `(v ~T0 @X0 1 ef ]
@@ -332,34 +335,34 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "40
 [; ;main.c: 40:     static char S1Anterior;
-[v F1153 `uc ~T0 @X0 1 s S1Anterior ]
+[v F1154 `uc ~T0 @X0 1 s S1Anterior ]
 "41
 [; ;main.c: 41:     static char S1Atual;
-[v F1154 `uc ~T0 @X0 1 s S1Atual ]
+[v F1155 `uc ~T0 @X0 1 s S1Atual ]
 "42
 [; ;main.c: 42:     static char S2Anterior;
-[v F1155 `uc ~T0 @X0 1 s S2Anterior ]
+[v F1156 `uc ~T0 @X0 1 s S2Anterior ]
 "43
 [; ;main.c: 43:     static char S2Atual;
-[v F1156 `uc ~T0 @X0 1 s S2Atual ]
+[v F1157 `uc ~T0 @X0 1 s S2Atual ]
 "44
 [; ;main.c: 44:     static char S3Anterior;
-[v F1157 `uc ~T0 @X0 1 s S3Anterior ]
+[v F1158 `uc ~T0 @X0 1 s S3Anterior ]
 "45
 [; ;main.c: 45:     static char S3Atual;
-[v F1158 `uc ~T0 @X0 1 s S3Atual ]
+[v F1159 `uc ~T0 @X0 1 s S3Atual ]
 "46
 [; ;main.c: 46:     static char S4Anterior;
-[v F1159 `uc ~T0 @X0 1 s S4Anterior ]
+[v F1160 `uc ~T0 @X0 1 s S4Anterior ]
 "47
 [; ;main.c: 47:     static char S4Atual;
-[v F1160 `uc ~T0 @X0 1 s S4Atual ]
+[v F1161 `uc ~T0 @X0 1 s S4Atual ]
 "49
 [; ;main.c: 49:     S1Atual = RB0;
-[e = F1154 -> _RB0 `uc ]
+[e = F1155 -> _RB0 `uc ]
 "51
 [; ;main.c: 51:     if((S1Atual)&&(!S1Anterior)){
-[e $ ! && != -> F1154 `i -> 0 `i ! != -> F1153 `i -> 0 `i 101  ]
+[e $ ! && != -> F1155 `i -> 0 `i ! != -> F1154 `i -> 0 `i 101  ]
 {
 "52
 [; ;main.c: 52:         if (menu != 1){
@@ -387,13 +390,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 101 ]
 "59
 [; ;main.c: 59:     S1Anterior = S1Atual;
-[e = F1153 F1154 ]
+[e = F1154 F1155 ]
 "60
 [; ;main.c: 60:     S2Atual = RB1;
-[e = F1156 -> _RB1 `uc ]
+[e = F1157 -> _RB1 `uc ]
 "62
 [; ;main.c: 62:     if((S2Atual)&&(!S2Anterior)){
-[e $ ! && != -> F1156 `i -> 0 `i ! != -> F1155 `i -> 0 `i 104  ]
+[e $ ! && != -> F1157 `i -> 0 `i ! != -> F1156 `i -> 0 `i 104  ]
 {
 "63
 [; ;main.c: 63:         if (menu != 1){
@@ -421,13 +424,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 104 ]
 "70
 [; ;main.c: 70:     S2Anterior = S2Atual;
-[e = F1155 F1156 ]
+[e = F1156 F1157 ]
 "71
 [; ;main.c: 71:     S3Atual = RB2;
-[e = F1158 -> _RB2 `uc ]
+[e = F1159 -> _RB2 `uc ]
 "73
 [; ;main.c: 73:     if((S3Atual)&&(!S3Anterior)){
-[e $ ! && != -> F1158 `i -> 0 `i ! != -> F1157 `i -> 0 `i 107  ]
+[e $ ! && != -> F1159 `i -> 0 `i ! != -> F1158 `i -> 0 `i 107  ]
 {
 "74
 [; ;main.c: 74:         if (menu != 1){
@@ -446,13 +449,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 107 ]
 "79
 [; ;main.c: 79:     S3Anterior = S3Atual;
-[e = F1157 F1158 ]
+[e = F1158 F1159 ]
 "80
 [; ;main.c: 80:     S4Atual = RB3;
-[e = F1160 -> _RB3 `uc ]
+[e = F1161 -> _RB3 `uc ]
 "82
 [; ;main.c: 82:     if((S4Atual)&&(!S4Anterior)){
-[e $ ! && != -> F1160 `i -> 0 `i ! != -> F1159 `i -> 0 `i 109  ]
+[e $ ! && != -> F1161 `i -> 0 `i ! != -> F1160 `i -> 0 `i 109  ]
 {
 "83
 [; ;main.c: 83:         if (menu == 1){
@@ -480,7 +483,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 109 ]
 "90
 [; ;main.c: 90:     S4Anterior = S4Atual;
-[e = F1159 F1160 ]
+[e = F1160 F1161 ]
 "91
 [; ;main.c: 91: }
 [e :UE 100 ]
@@ -548,224 +551,269 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 111:             lcd_cmd(0x83);
 [e ( _lcd_cmd (1 -> -> 131 `i `uc ]
 "112
-[; ;main.c: 112:             sprintf(string, "%d", milhar);
-[e ( _sprintf (1 , (. , &U _string :s 1C _milhar ]
+[; ;main.c: 112:             lcd_str("  C  ");
+[e ( _lcd_str (1 :s 1C ]
 "113
-[; ;main.c: 113:             lcd_str(string);
-[e ( _lcd_str (1 -> &U _string `*Cuc ]
+[; ;main.c: 113:             lcd_cmd(0x83);
+[e ( _lcd_cmd (1 -> -> 131 `i `uc ]
 "114
-[; ;main.c: 114:             sprintf(string, "%d", centena);
-[e ( _sprintf (1 , (. , &U _string :s 2C _centena ]
+[; ;main.c: 114:             sprintf(string, "%d", milhar);
+[e ( _sprintf (1 , (. , &U _string :s 2C _milhar ]
 "115
 [; ;main.c: 115:             lcd_str(string);
 [e ( _lcd_str (1 -> &U _string `*Cuc ]
+"116
+[; ;main.c: 116:             sprintf(string, "%d", centena);
+[e ( _sprintf (1 , (. , &U _string :s 3C _centena ]
 "117
-[; ;main.c: 117:             setPointReferencia = setPoint;
+[; ;main.c: 117:             lcd_str(string);
+[e ( _lcd_str (1 -> &U _string `*Cuc ]
+"119
+[; ;main.c: 119:             setPointReferencia = setPoint;
 [e = _setPointReferencia _setPoint ]
-"118
-[; ;main.c: 118:         }
+"120
+[; ;main.c: 120:         }
 }
 [e :U 117 ]
-"120
-[; ;main.c: 120:         lcd_cmd(0x89 +6);
-[e ( _lcd_cmd (1 -> + -> 137 `i -> 6 `i `uc ]
-"121
-[; ;main.c: 121:     } else {
+"122
+[; ;main.c: 122:         lcd_cmd(0x87);
+[e ( _lcd_cmd (1 -> -> 135 `i `uc ]
+"123
+[; ;main.c: 123:     } else {
 }
 [e $U 118  ]
 [e :U 116 ]
 {
-"122
-[; ;main.c: 122:         if (kp != kpReferencia){
+"124
+[; ;main.c: 124:         if (kp != kpReferencia){
 [e $ ! != _kp _kpReferencia 119  ]
 {
-"123
-[; ;main.c: 123:             lcd_cmd(0xC3);
-[e ( _lcd_cmd (1 -> -> 195 `i `uc ]
-"124
-[; ;main.c: 124:             sprintf(string, "%d", kp);
-[e ( _sprintf (1 , (. , &U _string :s 3C _kp ]
 "125
-[; ;main.c: 125:             lcd_str(string);
-[e ( _lcd_str (1 -> &U _string `*Cuc ]
+[; ;main.c: 125:             lcd_cmd(0xC3);
+[e ( _lcd_cmd (1 -> -> 195 `i `uc ]
 "126
-[; ;main.c: 126:             kpReferencia = kp;
-[e = _kpReferencia _kp ]
+[; ;main.c: 126:             lcd_str("     ");
+[e ( _lcd_str (1 :s 4C ]
 "127
-[; ;main.c: 127:         }
+[; ;main.c: 127:             lcd_cmd(0xC3);
+[e ( _lcd_cmd (1 -> -> 195 `i `uc ]
+"128
+[; ;main.c: 128:             sprintf(string, "%d", kp);
+[e ( _sprintf (1 , (. , &U _string :s 5C _kp ]
+"129
+[; ;main.c: 129:             lcd_str(string);
+[e ( _lcd_str (1 -> &U _string `*Cuc ]
+"130
+[; ;main.c: 130:             kpReferencia = kp;
+[e = _kpReferencia _kp ]
+"131
+[; ;main.c: 131:         }
 }
 [e :U 119 ]
-"129
-[; ;main.c: 129:         lcd_cmd(0xC9 +6);
-[e ( _lcd_cmd (1 -> + -> 201 `i -> 6 `i `uc ]
-"130
-[; ;main.c: 130:     }
+"133
+[; ;main.c: 133:         lcd_cmd(0xC7);
+[e ( _lcd_cmd (1 -> -> 199 `i `uc ]
+"134
+[; ;main.c: 134:     }
 }
 [e :U 118 ]
-"131
-[; ;main.c: 131: }
+"135
+[; ;main.c: 135:     if (x == 1){
+[e $ ! == _x -> 1 `i 120  ]
+{
+"136
+[; ;main.c: 136:         lcd_cmd(0x89 +2);
+[e ( _lcd_cmd (1 -> + -> 137 `i -> 2 `i `uc ]
+"137
+[; ;main.c: 137:         sprintf(string, "%d", ki);
+[e ( _sprintf (1 , (. , &U _string :s 6C _ki ]
+"138
+[; ;main.c: 138:         lcd_str(string);
+[e ( _lcd_str (1 -> &U _string `*Cuc ]
+"139
+[; ;main.c: 139:         lcd_cmd(0xC9 +2);
+[e ( _lcd_cmd (1 -> + -> 201 `i -> 2 `i `uc ]
+"140
+[; ;main.c: 140:         sprintf(string, "%d", kd);
+[e ( _sprintf (1 , (. , &U _string :s 7C _kd ]
+"141
+[; ;main.c: 141:         lcd_str(string);
+[e ( _lcd_str (1 -> &U _string `*Cuc ]
+"143
+[; ;main.c: 143:         x = 0;
+[e = _x -> 0 `i ]
+"144
+[; ;main.c: 144:     }
+}
+[e :U 120 ]
+"145
+[; ;main.c: 145: }
 [e :UE 115 ]
 }
-"133
-[; ;main.c: 133: void realizarCalculo()
+"147
+[; ;main.c: 147: void realizarCalculo()
 [v _realizarCalculo `(v ~T0 @X0 1 ef ]
-"134
-[; ;main.c: 134: {
+"148
+[; ;main.c: 148: {
 {
 [e :U _realizarCalculo ]
 [f ]
-"135
-[; ;main.c: 135:     temperatura = (ADC_Read(0)*10/8 - 150);
-[e = _temperatura -> - / * ( _ADC_Read (1 -> -> 0 `i `uc -> -> 10 `i `ui -> -> 8 `i `ui -> -> 150 `i `ui `f ]
-"136
-[; ;main.c: 136:     erro = (setPoint/10) - temperatura;
-[e = _erro - -> / _setPoint -> 10 `i `f _temperatura ]
-"137
-[; ;main.c: 137:     proporcional = kp * erro;
-[e = _proporcional * -> _kp `f _erro ]
-"138
-[; ;main.c: 138:     integral += (erro * ki) * 100E-3;
-[e =+ _integral -> * -> * _erro -> _ki `f `d .100e-3 `f ]
-"139
-[; ;main.c: 139:     derivativo += ((temperaturaReferencia - temperatura) * kd) / 100E-3;
-[e =+ _derivativo -> / -> * - _temperaturaReferencia _temperatura -> _kd `f `d .100e-3 `f ]
-"140
-[; ;main.c: 140:     temperaturaReferencia = temperatura;
-[e = _temperaturaReferencia _temperatura ]
-"142
-[; ;main.c: 142:     PID = (proporcional + integral + derivativo) / 4;
-[e = _PID / + + _proporcional _integral _derivativo -> -> 4 `i `f ]
-"143
-[; ;main.c: 143:     PID = controleMaximoMinimo(PID);
-[e = _PID -> ( _controleMaximoMinimo (1 -> _PID `i `f ]
-"145
-[; ;main.c: 145:     PWM1_Duty(PID, 4000);
-[e ( _PWM1_Duty (2 , -> _PID `ui -> -> 4000 `i `ui ]
-"146
-[; ;main.c: 146: }
-[e :UE 120 ]
-}
-"148
-[; ;main.c: 148: void controlarCooler()
-[v _controlarCooler `(v ~T0 @X0 1 ef ]
 "149
-[; ;main.c: 149: {
+[; ;main.c: 149:     temperatura = (ADC_Read(0)*10/8 - 150);
+[e = _temperatura -> - / * ( _ADC_Read (1 -> -> 0 `i `uc -> -> 10 `i `ui -> -> 8 `i `ui -> -> 150 `i `ui `f ]
+"150
+[; ;main.c: 150:     erro = (setPoint/10) - temperatura;
+[e = _erro - -> / _setPoint -> 10 `i `f _temperatura ]
+"151
+[; ;main.c: 151:     proporcional = kp * erro;
+[e = _proporcional -> * -> _kp `f _erro `i ]
+"152
+[; ;main.c: 152:     integral += (erro * ki) * 100E-3;
+[e =+ _integral * -> * _erro -> _ki `f `d .100e-3 ]
+"153
+[; ;main.c: 153:     derivativo += ((temperaturaReferencia - temperatura) * kd) / 100E-3;
+[e =+ _derivativo / -> * - _temperaturaReferencia _temperatura -> _kd `f `d .100e-3 ]
+"154
+[; ;main.c: 154:     temperaturaReferencia = temperatura;
+[e = _temperaturaReferencia _temperatura ]
+"156
+[; ;main.c: 156:     PID = (proporcional + integral + derivativo) / 4;
+[e = _PID / + + _proporcional _integral _derivativo -> 4 `i ]
+"157
+[; ;main.c: 157:     PID = controleMaximoMinimo(PID);
+[e = _PID ( _controleMaximoMinimo (1 _PID ]
+"159
+[; ;main.c: 159:     PWM1_Duty(PID, 4000);
+[e ( _PWM1_Duty (2 , -> _PID `ui -> -> 4000 `i `ui ]
+"160
+[; ;main.c: 160: }
+[e :UE 121 ]
+}
+"162
+[; ;main.c: 162: void controlarCooler()
+[v _controlarCooler `(v ~T0 @X0 1 ef ]
+"163
+[; ;main.c: 163: {
 {
 [e :U _controlarCooler ]
 [f ]
-"150
-[; ;main.c: 150:     int cooler = (unsigned int)ADC_Read(1);
+"164
+[; ;main.c: 164:     int cooler = (unsigned int)ADC_Read(1);
 [v _cooler `i ~T0 @X0 1 a ]
 [e = _cooler -> ( _ADC_Read (1 -> -> 1 `i `uc `i ]
-"151
-[; ;main.c: 151:     cooler = controleMaximoMinimo(cooler);
+"165
+[; ;main.c: 165:     cooler = controleMaximoMinimo(cooler);
 [e = _cooler ( _controleMaximoMinimo (1 _cooler ]
-"152
-[; ;main.c: 152:     PWM2_Duty(cooler, 4000);
+"166
+[; ;main.c: 166:     PWM2_Duty(cooler, 4000);
 [e ( _PWM2_Duty (2 , -> _cooler `ui -> -> 4000 `i `ui ]
-"153
-[; ;main.c: 153: }
-[e :UE 121 ]
+"167
+[; ;main.c: 167: }
+[e :UE 122 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"155
-[; ;main.c: 155: void main(void) {
+"169
+[; ;main.c: 169: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"156
-[; ;main.c: 156:     TRISA = 0xFF;
-[e = _TRISA -> -> 255 `i `uc ]
-"157
-[; ;main.c: 157:     TRISB = 0x0F;
-[e = _TRISB -> -> 15 `i `uc ]
-"158
-[; ;main.c: 158:     TRISC = 0x00;
-[e = _TRISC -> -> 0 `i `uc ]
-"159
-[; ;main.c: 159:     TRISD = 0x00;
-[e = _TRISD -> -> 0 `i `uc ]
-"160
-[; ;main.c: 160:     TRISE = 0x00;
-[e = _TRISE -> -> 0 `i `uc ]
-"161
-[; ;main.c: 161:     ADC_Init();
-[e ( _ADC_Init ..  ]
-"162
-[; ;main.c: 162:     PWM1_Start();
-[e ( _PWM1_Start ..  ]
-"163
-[; ;main.c: 163:     PWM2_Start();
-[e ( _PWM2_Start ..  ]
-"164
-[; ;main.c: 164:     lcd_init();
-[e ( _lcd_init ..  ]
-"165
-[; ;main.c: 165:     lcd_cmd(0x80);
-[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
-"166
-[; ;main.c: 166:     lcd_str("TP:  C  KI:");
-[e ( _lcd_str (1 :s 4C ]
-"167
-[; ;main.c: 167:     lcd_cmd(0xC0);
-[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
-"168
-[; ;main.c: 168:     lcd_str("KP:     KD:");
-[e ( _lcd_str (1 :s 5C ]
-"169
-[; ;main.c: 169:     imprimirValoresLcd();
-[e ( _imprimirValoresLcd ..  ]
 "170
-[; ;main.c: 170:     menu = 2;
-[e = _menu -> 2 `i ]
+[; ;main.c: 170:     TRISA = 0xFF;
+[e = _TRISA -> -> 255 `i `uc ]
 "171
-[; ;main.c: 171:     imprimirValoresLcd();
-[e ( _imprimirValoresLcd ..  ]
+[; ;main.c: 171:     TRISB = 0x0F;
+[e = _TRISB -> -> 15 `i `uc ]
 "172
-[; ;main.c: 172:     menu = 1;
-[e = _menu -> 1 `i ]
+[; ;main.c: 172:     TRISC = 0x00;
+[e = _TRISC -> -> 0 `i `uc ]
+"173
+[; ;main.c: 173:     TRISD = 0x00;
+[e = _TRISD -> -> 0 `i `uc ]
 "174
-[; ;main.c: 174:     while(1){
-[e :U 124 ]
-{
+[; ;main.c: 174:     TRISE = 0x00;
+[e = _TRISE -> -> 0 `i `uc ]
 "175
-[; ;main.c: 175:         kp = controleMaximoMinimo(kp);
-[e = _kp ( _controleMaximoMinimo (1 _kp ]
+[; ;main.c: 175:     ADC_Init();
+[e ( _ADC_Init ..  ]
 "176
-[; ;main.c: 176:         ki = controleMaximoMinimo(ki);
-[e = _ki ( _controleMaximoMinimo (1 _ki ]
+[; ;main.c: 176:     PWM1_Start();
+[e ( _PWM1_Start ..  ]
 "177
-[; ;main.c: 177:         kd = controleMaximoMinimo(kd);
-[e = _kd ( _controleMaximoMinimo (1 _kd ]
+[; ;main.c: 177:     PWM2_Start();
+[e ( _PWM2_Start ..  ]
+"178
+[; ;main.c: 178:     lcd_init();
+[e ( _lcd_init ..  ]
 "179
-[; ;main.c: 179:         controlarValores();
-[e ( _controlarValores ..  ]
+[; ;main.c: 179:     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
 "180
-[; ;main.c: 180:         realizarCalculo();
-[e ( _realizarCalculo ..  ]
+[; ;main.c: 180:     lcd_str("TP:  C  KI:");
+[e ( _lcd_str (1 :s 8C ]
 "181
-[; ;main.c: 181:         controlarCooler();
-[e ( _controlarCooler ..  ]
+[; ;main.c: 181:     lcd_cmd(0xC0);
+[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
 "182
-[; ;main.c: 182:         imprimirValoresLcd();
-[e ( _imprimirValoresLcd ..  ]
+[; ;main.c: 182:     lcd_str("KP:     KD:");
+[e ( _lcd_str (1 :s 9C ]
 "183
-[; ;main.c: 183:     }
-}
-[e :U 123 ]
-[e $U 124  ]
-[e :U 125 ]
+[; ;main.c: 183:     imprimirValoresLcd();
+[e ( _imprimirValoresLcd ..  ]
+"184
+[; ;main.c: 184:     menu = 2;
+[e = _menu -> 2 `i ]
 "185
-[; ;main.c: 185:     return;
-[e $UE 122  ]
+[; ;main.c: 185:     imprimirValoresLcd();
+[e ( _imprimirValoresLcd ..  ]
 "186
-[; ;main.c: 186: }
-[e :UE 122 ]
+[; ;main.c: 186:     menu = 1;
+[e = _menu -> 1 `i ]
+"188
+[; ;main.c: 188:     while(1){
+[e :U 125 ]
+{
+"189
+[; ;main.c: 189:         controlarValores();
+[e ( _controlarValores ..  ]
+"190
+[; ;main.c: 190:         kp = controleMaximoMinimo(kp);
+[e = _kp ( _controleMaximoMinimo (1 _kp ]
+"191
+[; ;main.c: 191:         ki = controleMaximoMinimo(ki);
+[e = _ki ( _controleMaximoMinimo (1 _ki ]
+"192
+[; ;main.c: 192:         kd = controleMaximoMinimo(kd);
+[e = _kd ( _controleMaximoMinimo (1 _kd ]
+"194
+[; ;main.c: 194:         realizarCalculo();
+[e ( _realizarCalculo ..  ]
+"195
+[; ;main.c: 195:         controlarCooler();
+[e ( _controlarCooler ..  ]
+"196
+[; ;main.c: 196:         imprimirValoresLcd();
+[e ( _imprimirValoresLcd ..  ]
+"197
+[; ;main.c: 197:     }
+}
+[e :U 124 ]
+[e $U 125  ]
+[e :U 126 ]
+"199
+[; ;main.c: 199:     return;
+[e $UE 123  ]
+"200
+[; ;main.c: 200: }
+[e :UE 123 ]
 }
 [p f _sprintf 8388736 ]
-[a 1C 37 100 0 ]
 [a 2C 37 100 0 ]
 [a 3C 37 100 0 ]
-[a 4C 84 80 58 32 32 67 32 32 75 73 58 0 ]
-[a 5C 75 80 58 32 32 32 32 32 75 68 58 0 ]
+[a 5C 37 100 0 ]
+[a 6C 37 100 0 ]
+[a 7C 37 100 0 ]
+[a 8C 84 80 58 32 32 67 32 32 75 73 58 0 ]
+[a 9C 75 80 58 32 32 32 32 32 75 68 58 0 ]
+[a 1C 32 32 67 32 32 0 ]
+[a 4C 32 32 32 32 32 0 ]

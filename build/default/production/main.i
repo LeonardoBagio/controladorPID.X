@@ -1975,10 +1975,10 @@ void lcd_str(const char* str);
 
 
 
-
+int x = 1;
 float temperatura = 0;
 float temperaturaReferencia = 0;
-int menu = 1;
+int menu;
 float erro;
 char string[32];
 int setPoint = 5000;
@@ -1987,10 +1987,10 @@ int kp = 10;
 int ki = 1;
 int kd = 0.002;
 int kpReferencia = 0;
-float proporcional;
-float integral;
-float derivativo;
-float PID;
+int proporcional;
+int integral;
+int derivativo;
+int PID;
 
 void controlarValores(){
     static char S1Anterior;
@@ -2065,6 +2065,8 @@ void imprimirValoresLcd(){
             int centena = (setPoint%1000)/100;
 
             lcd_cmd(0x83);
+            lcd_str("  C  ");
+            lcd_cmd(0x83);
             sprintf(string, "%d", milhar);
             lcd_str(string);
             sprintf(string, "%d", centena);
@@ -2073,16 +2075,28 @@ void imprimirValoresLcd(){
             setPointReferencia = setPoint;
         }
 
-        lcd_cmd(0x89 +6);
+        lcd_cmd(0x87);
     } else {
         if (kp != kpReferencia){
+            lcd_cmd(0xC3);
+            lcd_str("     ");
             lcd_cmd(0xC3);
             sprintf(string, "%d", kp);
             lcd_str(string);
             kpReferencia = kp;
         }
 
-        lcd_cmd(0xC9 +6);
+        lcd_cmd(0xC7);
+    }
+    if (x == 1){
+        lcd_cmd(0x89 +2);
+        sprintf(string, "%d", ki);
+        lcd_str(string);
+        lcd_cmd(0xC9 +2);
+        sprintf(string, "%d", kd);
+        lcd_str(string);
+
+        x = 0;
     }
 }
 
@@ -2128,11 +2142,11 @@ void main(void) {
     menu = 1;
 
     while(1){
+        controlarValores();
         kp = controleMaximoMinimo(kp);
         ki = controleMaximoMinimo(ki);
         kd = controleMaximoMinimo(kd);
 
-        controlarValores();
         realizarCalculo();
         controlarCooler();
         imprimirValoresLcd();
