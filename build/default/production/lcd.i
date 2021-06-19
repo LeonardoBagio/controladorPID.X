@@ -1717,14 +1717,16 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 27 "lcd.c" 2
+# 26 "lcd.c" 2
+
 # 1 "./lcd.h" 1
 # 64 "./lcd.h"
 void lcd_init(void);
 void lcd_cmd(unsigned char val);
 void lcd_dat(unsigned char val);
 void lcd_str(const char* str);
-# 28 "lcd.c" 2
+# 27 "lcd.c" 2
+
 
 
 void lcd_wr(unsigned char val)

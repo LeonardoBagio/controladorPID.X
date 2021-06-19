@@ -24,38 +24,17 @@ float temperatura = 0;
 float temperaturaReferencia = 0;
 int menu = 1;
 float erro;
-
+char string[32];
 int setPoint = 5000;
 int setPointReferencia = 0;
-char setPoint_string[32];
-
 float kp = 10;
 float ki = 1;
 float kd = 0.002;
-
 int kpReferencia = 0;
-char kp_string[32];
-
 float proporcional;
 float integral;
 float derivativo;
 float PID;
-
-void imprimirTemperatura(unsigned int tempSet){
-    int milhar = tempSet/1000;
-    int centena = (tempSet%1000)/100;
-    int dezena = ((tempSet%1000)%100)/10;
-    
-    lcd_cmd(L1_digito6);
-    sprintf(setPoint_string, "%d", milhar);
-    lcd_str(setPoint_string);
-    sprintf(setPoint_string, "%d", centena);
-    lcd_str(setPoint_string);
-    lcd_str(".");
-    sprintf(setPoint_string, "%d", dezena);
-    lcd_str(setPoint_string);
-    lcd_str(" C");
-}
 
 void controlarValores(){
     static char S1Anterior;
@@ -73,7 +52,7 @@ void controlarValores(){
         if (menu != 1){
             setPoint += 100;
         } else {
-            kp += 100;
+            kp += 10;
         }
     }
 
@@ -84,7 +63,7 @@ void controlarValores(){
         if (menu != 1){
             setPoint -= 100;
         } else {
-            kp -= 100;
+            kp -= 10;
         }
     }
 
@@ -94,8 +73,6 @@ void controlarValores(){
     if((S3Atual)&&(!S3Anterior)){
         if (menu != 1){
             setPoint += 10;
-        } else {
-            kp +=10;
         }
     }
 
@@ -128,35 +105,29 @@ int controleMaximoMinimo(int valor){
 void imprimirValoresLcd(){
     if (menu != 1){
         if (setPoint != setPointReferencia){
-            imprimirTemperatura(setPoint);
+            int milhar  = setPoint/1000;
+            int centena = (setPoint%1000)/100;
+            
+            lcd_cmd(L1_digito4);
+            sprintf(string, "%d", milhar);
+            lcd_str(string);
+            sprintf(string, "%d", centena);
+            lcd_str(string);            
+            
             setPointReferencia = setPoint;
         }
         
         lcd_cmd(L1_digito10+6);
     } else {
         if (kp != kpReferencia){
-            lcd_cmd(L2_digito6);
-            sprintf(kp_string, "%d", kp);
-            lcd_str(kp_string);
+            lcd_cmd(L2_digito4);
+            sprintf(string, "%d", kp);
+            lcd_str(string);
             kpReferencia = kp;
         }
         
         lcd_cmd(L2_digito10+6);
     }
-}
-
-void iniciarLcd(){
-    lcd_init();
-    lcd_cmd(L1_digito1);
-    lcd_str("TEMP:");
-    lcd_cmd(L2_digito1);
-    lcd_str("  KP:");
-    lcd_cmd(L1_digito6);
-    
-    imprimirValoresLcd();
-    menu = 2;
-    imprimirValoresLcd();
-    menu = 1;
 }
 
 void realizarCalculo()
@@ -170,7 +141,7 @@ void realizarCalculo()
     
     PID = (proporcional + integral + derivativo) / 4;
     PID = controleMaximoMinimo(PID);
-
+    
     PWM1_Duty(PID, 4000);
 }
 
@@ -187,14 +158,21 @@ void main(void) {
     TRISC = 0x00;
     TRISD = 0x00;
     TRISE = 0x00;
-    
     ADC_Init();
     PWM1_Start();
     PWM2_Start();
-    iniciarLcd();
+    lcd_init();
+    lcd_cmd(L1_digito1);
+    lcd_str("TP:  C  KI:");
+    lcd_cmd(L2_digito1);
+    lcd_str("KP:     KD:");
     
     while(1){
-        //controlarValores();
+        kp = controleMaximoMinimo(kp);
+        ki = controleMaximoMinimo(ki);
+        kd = controleMaximoMinimo(kd);     
+        
+        controlarValores();
         realizarCalculo();
         controlarCooler();
         imprimirValoresLcd();
