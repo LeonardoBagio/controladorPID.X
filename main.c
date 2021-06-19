@@ -29,8 +29,10 @@ int setPoint = 5000;
 int setPointReferencia = 0;
 int kp = 10;
 int ki = 1;
-int kd = 0.002;
+int kd = 1;
 int kpReferencia = 0;
+int kiReferencia = 0;
+int kdReferencia = 0;
 int proporcional;
 int integral;
 int derivativo;
@@ -49,10 +51,20 @@ void controlarValores(){
     S1Atual = S1;
 
     if((S1Atual)&&(!S1Anterior)){
-        if (menu != 1){
+        if (menu == 1){
             setPoint += 100;
-        } else {
-            kp += 10;
+        }
+        
+        if (menu == 2){
+            kp += 1;
+        }
+        
+        if (menu == 3){
+            ki += 1;
+        }
+        
+        if (menu == 4){
+            kd += 1;
         }
     }
 
@@ -60,10 +72,20 @@ void controlarValores(){
     S2Atual = S2;
 
     if((S2Atual)&&(!S2Anterior)){
-        if (menu != 1){
+        if (menu == 1){
             setPoint -= 100;
-        } else {
-            kp -= 10;
+        }
+        
+        if (menu == 2){
+            kp -= 1;
+        }
+        
+        if (menu == 3){
+            ki -= 1;
+        }
+        
+        if (menu == 4){
+            kd -= 1;
         }
     }
 
@@ -71,22 +93,18 @@ void controlarValores(){
     S3Atual = S3;
 
     if((S3Atual)&&(!S3Anterior)){
-        if (menu != 1){
-            setPoint += 10;
-        }
     }
 
     S3Anterior = S3Atual;
-    S4Atual = S4;
     
+    S4Atual = S4;
     if((S4Atual)&&(!S4Anterior)){
-        if (menu == 1){
-            menu = 2;
-        } else {
+        menu += 1;
+        
+        if (menu == 5){
             menu = 1;
         }
-    }   
-    
+    }
     S4Anterior = S4Atual;    
 }
 
@@ -103,44 +121,62 @@ int controleMaximoMinimo(int valor){
 }
 
 void imprimirValoresLcd(){
-    if (menu != 1){
-        if (setPoint != setPointReferencia){
-            int milhar  = setPoint/1000;
-            int centena = (setPoint%1000)/100;
-            
-            lcd_cmd(L1_digito4);
-            lcd_str("  C  ");
-            lcd_cmd(L1_digito4);
-            sprintf(string, "%d", milhar);
-            lcd_str(string);
-            sprintf(string, "%d", centena);
-            lcd_str(string);            
-            
-            setPointReferencia = setPoint;
-        }
-        
+    if (menu == 1){
         lcd_cmd(L1_digito8);
-    } else {
-        if (kp != kpReferencia){
-            lcd_cmd(L2_digito4);
-            lcd_str("     ");
-            lcd_cmd(L2_digito4);
-            sprintf(string, "%d", kp);
-            lcd_str(string);
-            kpReferencia = kp;
-        }
-        
+    }
+    
+    if (menu == 2){
         lcd_cmd(L2_digito8);
     }
-    if (x == 1){
+    
+    if (menu == 3){
+        lcd_cmd(L1_digito10+6);
+    }
+    
+    if (menu == 4){
+        lcd_cmd(L2_digito10+6);
+    }
+    
+    if (setPoint != setPointReferencia){
+         int milhar  = setPoint/1000;
+         int centena = (setPoint%1000)/100;
+
+         lcd_cmd(L1_digito4);
+         lcd_str("  C  ");
+         lcd_cmd(L1_digito4);
+         sprintf(string, "%d", milhar);
+         lcd_str(string);
+         sprintf(string, "%d", centena);
+         lcd_str(string);            
+
+         setPointReferencia = setPoint;
+     }
+    
+    if (kp != kpReferencia){
+        lcd_cmd(L2_digito4);
+        lcd_str("     ");
+        lcd_cmd(L2_digito4);
+        sprintf(string, "%d", kp);
+        lcd_str(string);
+        kpReferencia = kp;
+    }
+    
+    if (ki != kiReferencia){
+        lcd_cmd(L1_digito10+2);
+        lcd_str("     ");
         lcd_cmd(L1_digito10+2);
         sprintf(string, "%d", ki);
         lcd_str(string);
+        kiReferencia = ki;
+    }
+    
+    if (kd != kdReferencia){
+        lcd_cmd(L2_digito10+2);
+        lcd_str("     ");
         lcd_cmd(L2_digito10+2);
         sprintf(string, "%d", kd);
         lcd_str(string);
-        
-        x = 0;
+        kdReferencia = kd;
     }
 }
 
@@ -180,10 +216,6 @@ void main(void) {
     lcd_str("TP:  C  KI:");
     lcd_cmd(L2_digito1);
     lcd_str("KP:     KD:");
-    imprimirValoresLcd();
-    menu = 2;
-    imprimirValoresLcd();
-    menu = 1;
     
     while(1){
         controlarValores();
