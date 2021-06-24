@@ -1983,9 +1983,9 @@ int setPoint = 5500;
 int setPointCalculo = 0;
 int setPointReferencia = 0;
 int erro;
-int kp = 50;
-int ki = 2;
-int kd = 0;
+int kp = 30;
+int ki = 3;
+int kd = 0.1;
 int kpReferencia = 0;
 int kiReferencia = 0;
 int kdReferencia = 0;
@@ -1993,6 +1993,11 @@ int proporcional;
 int integral;
 int derivativo;
 int PID;
+
+int x = 0;
+int xRef = 0;
+int PIDRef = 0;
+unsigned int estouro = 0;
 
 void controlarValores(){
     static char S1Anterior;
@@ -2012,7 +2017,7 @@ void controlarValores(){
         }
 
         if (menu == 2){
-            kp += 10;
+            kp += 5;
         }
 
         if (menu == 3){
@@ -2033,7 +2038,7 @@ void controlarValores(){
         }
 
         if (menu == 2){
-            kp -= 10;
+            kp -= 5;
         }
 
         if (menu == 3){
@@ -2063,6 +2068,10 @@ void controlarValores(){
         }
     }
     S4Anterior = S4Atual;
+
+    kp = controleMaximoMinimo(kp);
+    ki = controleMaximoMinimo(ki);
+    kd = controleMaximoMinimo(kd);
 }
 
 int controleMaximoMinimo(int valor){
@@ -2126,19 +2135,19 @@ void imprimirValoresLcd(){
         lcd_str(string);
         kiReferencia = ki;
     }
-
-    if (kd != kdReferencia){
+# 192 "main.c"
+    if (PID != PIDRef){
         lcd_cmd(0xC9 +2);
         lcd_str("     ");
         lcd_cmd(0xC9 +2);
-        sprintf(string, "%d", kd);
+        sprintf(string, "%d", PID);
         lcd_str(string);
-        kdReferencia = kd;
+        PIDRef = PID;
     }
+# 209 "main.c"
 }
 
-void realizarCalculo()
-{
+void realizarCalculo(){
     temperatura = (ADC_Read(0)*10/8 - 150);
     erro = (setPointCalculo/10) - temperatura;
     proporcional = kp * erro;
@@ -2152,8 +2161,7 @@ void realizarCalculo()
     PWM1_Duty(PID, 4000);
 }
 
-void controlarCooler()
-{
+void controlarCooler(){
     int cooler = (unsigned int)ADC_Read(1);
     cooler = controleMaximoMinimo(cooler);
     PWM2_Duty(cooler, 4000);
@@ -2165,6 +2173,11 @@ void main(void) {
     TRISC = 0x00;
     TRISD = 0x00;
     TRISE = 0x00;
+
+    OPTION_REG = 0x07;
+    INTCON = 0xA0;
+    TMR0 = 9;
+
     ADC_Init();
     PWM1_Start();
     PWM2_Start();
@@ -2176,11 +2189,14 @@ void main(void) {
 
     while(1){
         controlarValores();
-        kp = controleMaximoMinimo(kp);
-        ki = controleMaximoMinimo(ki);
-        kd = controleMaximoMinimo(kd);
+        estouro += INTCONbits.TMR0IF;
 
-        realizarCalculo();
+        if (estouro > 124){
+            estouro = 0;
+
+            realizarCalculo();
+        }
+
         controlarCooler();
         imprimirValoresLcd();
     }
