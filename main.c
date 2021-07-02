@@ -37,10 +37,6 @@ int proporcional;
 int integral;
 int derivativo;
 int PID;
-
-int x = 0;
-int xRef = 0;
-int PIDRef = 0;
 unsigned int estouro = 0;
 
 void controlarValores(){
@@ -180,32 +176,14 @@ void imprimirValoresLcd(){
         kiReferencia = ki;
     }
     
-    /*if (kd != kdReferencia){
+    if (kd != kdReferencia){
         lcd_cmd(L2_digito10+2);
         lcd_str("     ");
         lcd_cmd(L2_digito10+2);
         sprintf(string, "%d", kd);
         lcd_str(string);
         kdReferencia = kd;
-    }*/
-    
-    if (PID != PIDRef){
-        lcd_cmd(L2_digito10+2);
-        lcd_str("     ");
-        lcd_cmd(L2_digito10+2);
-        sprintf(string, "%d", PID);
-        lcd_str(string);
-        PIDRef = PID;
     }
-    
-    /*if (x != xRef){
-        lcd_cmd(L2_digito10+2);
-        lcd_str("     ");
-        lcd_cmd(L2_digito10+2);
-        sprintf(string, "%d", x);
-        lcd_str(string);
-        xRef = x;
-    }*/
 }
 
 void realizarCalculo(){
@@ -254,7 +232,6 @@ void main(void) {
         
         if (estouro > 124){
             estouro = 0;
-            //x++;
             realizarCalculo();
         }
         

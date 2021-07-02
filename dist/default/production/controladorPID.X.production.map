@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.32\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\controladorPID.X.production.sym \
   --cmf=dist/default/production\controladorPID.X.production.cmf -z \
-  -Q16F877A -oC:\Users\leoba\AppData\Local\Temp\xcAsei4.4 \
+  -Q16F877A -oC:\Users\leoba\AppData\Local\Temp\xcAsb4c.4 \
   --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/controladorPID.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=0110h-016Fh -pstack=STACK \
@@ -19,7 +19,7 @@ Linker command line:
   -AEEDATA=00h-0FFh/02100h -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 \
   -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 \
   -preset_vec=00h,intentry,init,end_init -ppowerup=CODE -pcinit=CODE \
-  -pfunctab=ENTRY -k C:\Users\leoba\AppData\Local\Temp\xcAsei4.o \
+  -pfunctab=ENTRY -k C:\Users\leoba\AppData\Local\Temp\xcAsb4c.o \
   dist/default/production\controladorPID.X.production.o 
 
 Object code version is 3.11
@@ -29,7 +29,7 @@ Machine type is 16F877A
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\leoba\AppData\Local\Temp\xcAsei4.o
+C:\Users\leoba\AppData\Local\Temp\xcAsb4c.o
                 end_init                              0        0        3        0       0
                 config                             2007     2007        1        0       4
 dist/default/production\controladorPID.X.production.o
@@ -67,11 +67,11 @@ dist/default/production\controladorPID.X.production.o
                 maintext                            9CC      9CC       74     1398       0
                 cstackBANK0                          20       20       50       20       1
                 cstackCOMMON                         70       70        E       70       1
-                cstackBANK1                          CC       CC        C       A0       1
+                cstackBANK1                          C6       C6        C       A0       1
                 clrtext                            16CE     16CE        8     2D9C       0
                 bssBANK3                            190      190       20      190       1
-                dataBANK1                            D8       D8        6       A0       1
-                bssBANK1                             A0       A0       2C       A0       1
+                dataBANK1                            D2       D2        6       A0       1
+                bssBANK1                             A0       A0       26       A0       1
                 strings                             800      800       41     1000       0
                 idataBANK1                         16C8     16C8        6     2D90       0
 
@@ -130,9 +130,9 @@ TOTAL           Name                               Link     Load   Length     Sp
                 cstackBANK0                          20       20       50         1
 
         CLASS   BANK1          
-                cstackBANK1                          CC       CC        C         1
-                dataBANK1                            D8       D8        6         1
-                bssBANK1                             A0       A0       2C         1
+                cstackBANK1                          C6       C6        C         1
+                dataBANK1                            D2       D2        6         1
+                bssBANK1                             A0       A0       26         1
 
         CLASS   BANK2          
 
@@ -167,7 +167,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
                 cstackBANK0                    000020  000050  000070        20       1  BANK0       1
                 text19                         00002E  0000BC  0000EA        5C       0  CODE        2
                 cstackCOMMON                   000070  00000E  00007E        70       1  COMMON      1
-                bssBANK1                       0000A0  00003E  0000DE        A0       1  BANK1       1
+                bssBANK1                       0000A0  000038  0000D8        A0       1  BANK1       1
                 bssBANK3                       000190  000020  0001B0       190       1  BANK3       1
                 text5                          0000EA  00019C  000286       1D4       0  CODE        2
                 text23                         000286  0001DD  000463       50C       0  CODE        2
@@ -206,7 +206,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
-        BANK1            00DE-00EF             12           1
+        BANK1            00D8-00EF             18           1
         BANK2            0110-016F             60           1
         BANK3            01B0-01EF             40           1
         CODE             0841-0844              4           2
@@ -220,7 +220,7 @@ UNUSED ADDRESS RANGES
                          1000-16C1            100
                          1800-1FFF            100
         IDLOC            2000-2003              4           2
-        RAM              00DE-00EF             12           1
+        RAM              00D8-00EF             18           1
                          0110-016F             60
                          01B0-01EF             40
         SFR0             0000-001F             20           1
@@ -277,8 +277,7 @@ _GO_nDONE                      (abs)        00FA
 _INTCON                        (abs)        000B
 _INTCONbits                    (abs)        000B
 _OPTION_REG                    (abs)        0081
-_PID                           bssBANK1     00A8
-_PIDRef                        bssBANK1     00A2
+_PID                           bssBANK1     00A2
 _PORTD                         (abs)        0008
 _PORTEbits                     (abs)        0009
 _PR2                           (abs)        0092
@@ -486,9 +485,9 @@ __initialization               cinit        07C4
 __pbssBANK1                    bssBANK1     00A0
 __pbssBANK3                    bssBANK3     0190
 __pcstackBANK0                 cstackBANK0  0020
-__pcstackBANK1                 cstackBANK1  00CC
+__pcstackBANK1                 cstackBANK1  00C6
 __pcstackCOMMON                cstackCOMMON 0070
-__pdataBANK1                   dataBANK1    00D8
+__pdataBANK1                   dataBANK1    00D2
 __pidataBANK1                  idataBANK1   16C8
 __pmaintext                    maintext     09CC
 __pstrings                     strings      0800
@@ -556,44 +555,45 @@ __stringtab                    strings      0800
 _controlarCooler               text16       1767
 _controlarValores              text15       0DCC
 _controleMaximoMinimo          text17       1703
-_derivativo                    bssBANK1     00AA
+_derivativo                    bssBANK1     00A4
 _dpowers                       strings      0810
-_erro                          bssBANK1     00B8
+_erro                          bssBANK1     00B2
 _estouro                       bssBANK1     00A0
 _imprimirValoresLcd            text5        00EA
-_integral                      bssBANK1     00AC
-_kd                            bssBANK1     00B6
-_ki                            dataBANK1    00D8
-_kiReferencia                  bssBANK1     00B2
-_kp                            dataBANK1    00DA
-_kpReferencia                  bssBANK1     00B4
+_integral                      bssBANK1     00A6
+_kd                            bssBANK1     00B0
+_kdReferencia                  bssBANK1     00AA
+_ki                            dataBANK1    00D2
+_kiReferencia                  bssBANK1     00AC
+_kp                            dataBANK1    00D4
+_kpReferencia                  bssBANK1     00AE
 _lcd_cmd                       text11       16F3
 _lcd_dat                       text10       0845
 _lcd_init                      text4        17CA
 _lcd_str                       text9        0003
 _lcd_wr                        text12       16C2
 _main                          maintext     09CC
-_menu                          bssBANK1     00BE
-_proporcional                  bssBANK1     00AE
+_menu                          bssBANK1     00B8
+_proporcional                  bssBANK1     00A8
 _realizarCalculo               text1        0ECD
-_setPoint                      dataBANK1    00DC
-_setPointCalculo               bssBANK1     00BC
-_setPointReferencia            bssBANK1     00BA
+_setPoint                      dataBANK1    00D6
+_setPointCalculo               bssBANK1     00B6
+_setPointReferencia            bssBANK1     00B4
 _sprintf                       text6        0CE4
 _string                        bssBANK3     0190
-_temperatura                   bssBANK1     00C2
-_temperaturaReferencia         bssBANK1     00C0
+_temperatura                   bssBANK1     00BC
+_temperaturaReferencia         bssBANK1     00BA
 btemp                          (abs)        007E
 clear_ram0                     clrtext      16CE
-controlarCooler@cooler         cstackBANK1  00D3
-controlarValores@S1Anterior    bssBANK1     00CB
-controlarValores@S1Atual       bssBANK1     00CA
-controlarValores@S2Anterior    bssBANK1     00C9
-controlarValores@S2Atual       bssBANK1     00C8
-controlarValores@S3Anterior    bssBANK1     00C7
-controlarValores@S3Atual       bssBANK1     00C6
-controlarValores@S4Anterior    bssBANK1     00C5
-controlarValores@S4Atual       bssBANK1     00C4
+controlarCooler@cooler         cstackBANK1  00CD
+controlarValores@S1Anterior    bssBANK1     00C5
+controlarValores@S1Atual       bssBANK1     00C4
+controlarValores@S2Anterior    bssBANK1     00C3
+controlarValores@S2Atual       bssBANK1     00C2
+controlarValores@S3Anterior    bssBANK1     00C1
+controlarValores@S3Atual       bssBANK1     00C0
+controlarValores@S4Anterior    bssBANK1     00BF
+controlarValores@S4Atual       bssBANK1     00BE
 controleMaximoMinimo@valor     cstackCOMMON 0070
 end_of_initialization          cinit        07FC
 imprimirValoresLcd@centena     cstackBANK0  0030

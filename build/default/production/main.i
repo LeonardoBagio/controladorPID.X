@@ -1993,10 +1993,6 @@ int proporcional;
 int integral;
 int derivativo;
 int PID;
-
-int x = 0;
-int xRef = 0;
-int PIDRef = 0;
 unsigned int estouro = 0;
 
 void controlarValores(){
@@ -2135,16 +2131,15 @@ void imprimirValoresLcd(){
         lcd_str(string);
         kiReferencia = ki;
     }
-# 192 "main.c"
-    if (PID != PIDRef){
+
+    if (kd != kdReferencia){
         lcd_cmd(0xC9 +2);
         lcd_str("     ");
         lcd_cmd(0xC9 +2);
-        sprintf(string, "%d", PID);
+        sprintf(string, "%d", kd);
         lcd_str(string);
-        PIDRef = PID;
+        kdReferencia = kd;
     }
-# 209 "main.c"
 }
 
 void realizarCalculo(){
@@ -2193,7 +2188,6 @@ void main(void) {
 
         if (estouro > 124){
             estouro = 0;
-
             realizarCalculo();
         }
 
